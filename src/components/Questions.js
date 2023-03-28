@@ -1,10 +1,8 @@
 import { useState } from "react"
-import { useEffect } from "react"
 
-function Question({allAns,correct_ans,isShow,setCounter}){
+function Question({allAns,correct_ans,isShow,answer, setAnswer,setCounter}){
   const [clicked, setClicked] = useState('')
-  const [answer, setAnswer] = useState([])
-  const [correct, setCorrect] = useState([])
+  // const [] = useState([])
 
   console.log(answer)
 

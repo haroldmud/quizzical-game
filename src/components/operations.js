@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import Question from "./Questions";
 
-import {IoCloseCircle, IoCheckmarkCircle} from 'react-icons/io5'
-
 export default function Operation() {
   const [quizz, setQuizz] = useState([])
   const [click, setClick] = useState(true)
   const [check, setCheck]=useState(false);
-  // const [answer, setAnswer] = useState([])
-  const [counter, setCounter] = useState(0);
+  const [answer, setAnswer] = useState([]);
+  const [counter, setCounter] = useState('F');
   
   useEffect(()=>{
     fetch("https://opentdb.com/api.php?amount=10")
@@ -17,23 +15,11 @@ export default function Operation() {
       .catch(err => console.log(err))
   }, [])
 
-  // function shuffleArray(array) {
-  //   for (let i = array.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [array[i], array[j]] = [array[j], array[i]];
-  //   }
-  //   return array;
-  // }
+  const randomly = ['A+','A','B+','B','C+','C','D','F'];
+  function handleRandom(){
 
-  // function checkCorrect(){
-  //   for(let i=0;i<quizz.length;i++){
-  //     if(quizz[i].correct_answer === quizz[i].){
-  //       setCheck(true)
-  //     }else{
-  //       setCheck(false)
-  //     }
-  //   }
-  // };
+    answer.length === 0? setCounter('F') :setCounter(randomly[Math.floor(Math.random() * randomly.length-1)])
+  }
 
   return (
     <section className="flex justify-center pt-20">
@@ -46,32 +32,26 @@ export default function Operation() {
               {item.question}
             </p>
                 <div className="flex gap-4 mt-4">
-                <Question setCounter={setCounter}  isShow={check} correct_ans={item.correct_answer} allAns={[item.correct_answer, ...item.incorrect_answers]} setCheck={setCheck}/>
+                <Question answer={answer} setAnswer={setAnswer} setCounter={setCounter}  isShow={check} correct_ans={item.correct_answer} allAns={[item.correct_answer, ...item.incorrect_answers]} setCheck={setCheck}/>
           
             </div> 
           </div>
             )
           }
-          <div className="flex justify-between">
-            <p>{JSON.stringify(quizz, null, 2)}</p>
-            {/* <div className="flex gap-4 mt-4">
-              {assertOne.map((item,idx)=>
-                  <button key={idx}
-                  className={`"bg-blue-200" : ""}  text-blues border border-blues px-2 rounded-md text-sm font-semibold `}>{item.name}</button>
-                )}
-            </div> */}
-            {/* { questionOne === 0 ? <button className="text-red-500 text-2xl"><IoCloseCircle/></button> : questionOne === 1 ? <button className="text-green-500 text-2xl"><IoCheckmarkCircle/></button> : ""}   */}
-          </div>
         </div>
-        <div>
-          {counter}/10
-        </div>
+        { !click && <div className="text-center mt-12">
+          YOUR SCORE IS <span className={`${counter ==='A+' || counter === "A" ? 
+                                            "text-green-900" : counter === "B+" || counter === "B" ?
+                                            "text-green-500" : counter === "C+" || counter === "C" ?
+                                            "text-blue-500" : "text-red-900"
+                                          } font-bold`}>{counter}</span> 
+        </div>}
         <div className="mt-8">
           <div className="mt-20 flex justify-center pb-20">
-            {<div>
-              <button onClick={()=> {setClick(false); setCheck(true) }} className={`${click ? '': 'hidden'}bg-blues p-4 text-white font-bold rounded-lg shadow-2xl`}>Result</button>
-              <button onClick={()=> window.location.reload()} className={`${click?'hidden':''} bg-blues p-4 text-white font-bold rounded-lg shadow-2xl`}>Next challenge</button>
-            </div> }
+            {
+             click?  <button onClick={()=> {setClick(false); setCheck(true);handleRandom() }} className={`bg-blues p-4 text-white font-bold rounded-lg shadow-2xl`}>Result</button>
+              : <button onClick={()=> window.location.reload()} className={` bg-blues p-4 text-white font-bold rounded-lg shadow-2xl`}>Next challenge</button>
+             }
           </div>
         </div>
       </div>
