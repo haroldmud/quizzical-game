@@ -15,15 +15,16 @@ export default function Operation() {
       .catch(err => console.log(err))
   }, [])
 
-  const randomly = ['A+','A','B+','B','C+','C','D','F'];
+  const success = ['A+','A','B+','B','C+']
+  const randomly = ['C+','C','D','F'];
   function handleRandom(){
 
-    answer.length === 0? setCounter('F') :setCounter(randomly[Math.floor(Math.random() * randomly.length-1)])
+    answer.length === 0 || success.length !==0 ? setCounter('F') :setCounter(randomly[Math.floor(Math.random() * randomly.length-1)])
   }
 
   return (
     <section className="flex justify-center pt-20">
-      <div className="w-6/12">
+      <div className="w-6/12 relative">
         <div>
           {
             quizz.map((item, idx) =>
@@ -38,7 +39,11 @@ export default function Operation() {
           </div>
             )
           }
-        </div>
+        </div> 
+        {
+        !click && <div className=" w-full h-[43rem] absolute top-12">
+
+        </div>}
         { !click && <div className="text-center mt-12">
           YOUR SCORE IS <span className={`${counter ==='A+' || counter === "A" ? 
                                             "text-green-900" : counter === "B+" || counter === "B" ?
