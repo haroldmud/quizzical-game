@@ -2,7 +2,6 @@ import { useState } from "react"
 
 function Question({allAns,correct_ans,isShow,answer, setAnswer,setCounter}){
   const [clicked, setClicked] = useState('')
-  // const [] = useState([])
 
   console.log(answer)
 
