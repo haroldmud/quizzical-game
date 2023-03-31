@@ -33,7 +33,14 @@ export default function Operation() {
               {item.question}
             </p>
                 <div className="flex gap-4 mt-4">
-                <Question answer={answer} setAnswer={setAnswer} setCounter={setCounter}  isShow={check} correct_ans={item.correct_answer} allAns={[item.correct_answer, ...item.incorrect_answers]} setCheck={setCheck}/>
+                <Question answer={answer} 
+                          setAnswer={setAnswer} 
+                          setCounter={setCounter}  
+                          isShow={check} 
+                          correct_ans={item.correct_answer} 
+                          allAns={[item.correct_answer, ...item.incorrect_answers]} 
+                          setCheck={setCheck}
+                />
           
             </div> 
           </div>

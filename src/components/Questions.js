@@ -3,8 +3,6 @@ import { useState } from "react"
 function Question({allAns,correct_ans,isShow,answer, setAnswer,setCounter}){
   const [clicked, setClicked] = useState('')
 
-  console.log(answer)
-
   function handleAns(value){
     if(isShow){
       if(correct_ans ===value ){

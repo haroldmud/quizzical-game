@@ -13,9 +13,7 @@ export default function App(){
           </div>
   )}else{
     return(
-      <>
         <Operation/>
-      </>
     )
   }
 }
