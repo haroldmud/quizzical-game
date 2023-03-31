@@ -1,11 +1,11 @@
 import { useState } from "react"
 
-function Question({allAns,correct_ans,isShow,answer, setAnswer,setCounter}){
+function Question({allAns, correct_ans, isShow, answer, setAnswer, setCounter}){
   const [clicked, setClicked] = useState('')
 
   function handleAns(value){
     if(isShow){
-      if(correct_ans ===value ){
+      if(correct_ans === value ){
         return "bg-green-500"
       }else{
         if(clicked === value)
